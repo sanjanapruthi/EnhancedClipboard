@@ -29,23 +29,25 @@ def set_up_gui():
 
 	button_list = []
 
+	# Set up the spacing
 	for i in range(10):
 		root.grid_rowconfigure(i, weight=1)
+	root.grid_columnconfigure(0, weight=1)
+	root.grid_columnconfigure(1, weight=1)
+	root.grid_columnconfigure(2, weight=10)
 
+	# Create the buttons
 	for i in range(10):
-		b = Button(root, text=str(i), height=1, highlightbackground='#bffff3')
-		b.pack(expand=NO)
+		b = Button(root, text="  "+str(i)+"  ", height=1, highlightbackground='#bffff3')
 		b.grid(row=i,column=1, sticky=N+S+E+W)
 
 		c = Button(root, text=dicti[i], highlightbackground='#bffff3')
-		c.pack(expand=YES,fill=BOTH)
-		c.grid(row=i,column=2,columnspan=6,sticky=N+S+E+W)
+		c.grid(row=i,column=2,sticky=N+S+E+W)
 
 		button_list.append(c)
 
-	current = Button(root, text='CURRENT', height=1, highlightbackground='#bffff3')
-	current.pack(expand=NO)
-	current.grid(row=0,column=0, sticky=N+S+E+W)
+	current = Button(root, text='-->', height=1, highlightbackground='#bffff3')
+	current.grid(row=0,column=0)
 	mainloop()
 
 # Shows the current clipboard slot
@@ -68,7 +70,6 @@ def read_from_clipboard():
         'pbpaste', env={'LANG': 'en_US.UTF-8'}).decode('utf-8')
 
 def on_press(key):
-
     global dicti
     global clipboard
     global currently_pressed
@@ -120,6 +121,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
